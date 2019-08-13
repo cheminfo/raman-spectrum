@@ -21,7 +21,7 @@ export function autoPeakPicking(spectrum, options = {}) {
     replaceExisting = true
   } = options;
 
-  let peaks = gsd(spectrum.wavelength, spectrum.absorbance, {
+  let peaks = gsd(spectrum.wavelength, spectrum.intensity, {
     noiseLevel,
     minMaxRatio,
     realTopDetection: true,
@@ -31,7 +31,7 @@ export function autoPeakPicking(spectrum, options = {}) {
   });
 
   peaks = peaks.filter(
-    (peak) => peak.x >= fromWavelength && peak.x <= toWavelength
+    peak => peak.x >= fromWavelength && peak.x <= toWavelength
   );
 
   if (replaceExisting) {
@@ -46,7 +46,7 @@ export function autoPeakPicking(spectrum, options = {}) {
     }
     addPeak(spectrum, {
       wavelength: peak.x,
-      absorbance: peak.y
+      intensity: peak.y
     });
   }
 }

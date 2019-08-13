@@ -9,7 +9,7 @@
     "src"
   ],
   "scripts": {
-    "build": "rollup -c && cheminfo-build --root RamanSpectrum",
+    "build": "rollup -c && cheminfo build --root RamanSpectrum",
     "build-doc": "cheminfo doc",
     "eslint": "eslint src",
     "eslint-fix": "npm run eslint -- --fix",
