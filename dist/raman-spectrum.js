@@ -1,6 +1,6 @@
 /**
  * raman-spectrum
- * @version v0.1.1
+ * @version v0.1.2
  * @link https://github.com/cheminfo/raman-spectrum#readme
  * @license MIT
  */
@@ -2860,7 +2860,7 @@ function abstractMatrix(superCtor) {
 
       if (c1 !== r2) {
         // eslint-disable-next-line no-console
-        console.warn("Multiplying ".concat(r1, " x ").concat(c1, " and ").concat(r2, " x ").concat(c2, " matrix: dimensions do not match."));
+        console.warn(`Multiplying ${r1} x ${c1} and ${r2} x ${c2} matrix: dimensions do not match.`);
       } // Put a matrix into the top left of a matrix of zeros.
       // `rows` and `cols` are the dimensions of the output matrix.
 
@@ -3407,17 +3407,100 @@ function abstractMatrix(superCtor) {
    Add dynamically instance and static methods for mathematical operations
    */
 
-  var inplaceOperator = "\n(function %name%(value) {\n    if (typeof value === 'number') return this.%name%S(value);\n    return this.%name%M(value);\n})\n";
-  var inplaceOperatorScalar = "\n(function %name%S(value) {\n    for (var i = 0; i < this.rows; i++) {\n        for (var j = 0; j < this.columns; j++) {\n            this.set(i, j, this.get(i, j) %op% value);\n        }\n    }\n    return this;\n})\n";
-  var inplaceOperatorMatrix = "\n(function %name%M(matrix) {\n    matrix = this.constructor.checkMatrix(matrix);\n    checkDimensions(this, matrix);\n    for (var i = 0; i < this.rows; i++) {\n        for (var j = 0; j < this.columns; j++) {\n            this.set(i, j, this.get(i, j) %op% matrix.get(i, j));\n        }\n    }\n    return this;\n})\n";
-  var staticOperator = "\n(function %name%(matrix, value) {\n    var newMatrix = new this[Symbol.species](matrix);\n    return newMatrix.%name%(value);\n})\n";
-  var inplaceMethod = "\n(function %name%() {\n    for (var i = 0; i < this.rows; i++) {\n        for (var j = 0; j < this.columns; j++) {\n            this.set(i, j, %method%(this.get(i, j)));\n        }\n    }\n    return this;\n})\n";
-  var staticMethod = "\n(function %name%(matrix) {\n    var newMatrix = new this[Symbol.species](matrix);\n    return newMatrix.%name%();\n})\n";
-  var inplaceMethodWithArgs = "\n(function %name%(%args%) {\n    for (var i = 0; i < this.rows; i++) {\n        for (var j = 0; j < this.columns; j++) {\n            this.set(i, j, %method%(this.get(i, j), %args%));\n        }\n    }\n    return this;\n})\n";
-  var staticMethodWithArgs = "\n(function %name%(matrix, %args%) {\n    var newMatrix = new this[Symbol.species](matrix);\n    return newMatrix.%name%(%args%);\n})\n";
-  var inplaceMethodWithOneArgScalar = "\n(function %name%S(value) {\n    for (var i = 0; i < this.rows; i++) {\n        for (var j = 0; j < this.columns; j++) {\n            this.set(i, j, %method%(this.get(i, j), value));\n        }\n    }\n    return this;\n})\n";
-  var inplaceMethodWithOneArgMatrix = "\n(function %name%M(matrix) {\n    matrix = this.constructor.checkMatrix(matrix);\n    checkDimensions(this, matrix);\n    for (var i = 0; i < this.rows; i++) {\n        for (var j = 0; j < this.columns; j++) {\n            this.set(i, j, %method%(this.get(i, j), matrix.get(i, j)));\n        }\n    }\n    return this;\n})\n";
-  var inplaceMethodWithOneArg = "\n(function %name%(value) {\n    if (typeof value === 'number') return this.%name%S(value);\n    return this.%name%M(value);\n})\n";
+  var inplaceOperator = `
+(function %name%(value) {
+    if (typeof value === 'number') return this.%name%S(value);
+    return this.%name%M(value);
+})
+`;
+  var inplaceOperatorScalar = `
+(function %name%S(value) {
+    for (var i = 0; i < this.rows; i++) {
+        for (var j = 0; j < this.columns; j++) {
+            this.set(i, j, this.get(i, j) %op% value);
+        }
+    }
+    return this;
+})
+`;
+  var inplaceOperatorMatrix = `
+(function %name%M(matrix) {
+    matrix = this.constructor.checkMatrix(matrix);
+    checkDimensions(this, matrix);
+    for (var i = 0; i < this.rows; i++) {
+        for (var j = 0; j < this.columns; j++) {
+            this.set(i, j, this.get(i, j) %op% matrix.get(i, j));
+        }
+    }
+    return this;
+})
+`;
+  var staticOperator = `
+(function %name%(matrix, value) {
+    var newMatrix = new this[Symbol.species](matrix);
+    return newMatrix.%name%(value);
+})
+`;
+  var inplaceMethod = `
+(function %name%() {
+    for (var i = 0; i < this.rows; i++) {
+        for (var j = 0; j < this.columns; j++) {
+            this.set(i, j, %method%(this.get(i, j)));
+        }
+    }
+    return this;
+})
+`;
+  var staticMethod = `
+(function %name%(matrix) {
+    var newMatrix = new this[Symbol.species](matrix);
+    return newMatrix.%name%();
+})
+`;
+  var inplaceMethodWithArgs = `
+(function %name%(%args%) {
+    for (var i = 0; i < this.rows; i++) {
+        for (var j = 0; j < this.columns; j++) {
+            this.set(i, j, %method%(this.get(i, j), %args%));
+        }
+    }
+    return this;
+})
+`;
+  var staticMethodWithArgs = `
+(function %name%(matrix, %args%) {
+    var newMatrix = new this[Symbol.species](matrix);
+    return newMatrix.%name%(%args%);
+})
+`;
+  var inplaceMethodWithOneArgScalar = `
+(function %name%S(value) {
+    for (var i = 0; i < this.rows; i++) {
+        for (var j = 0; j < this.columns; j++) {
+            this.set(i, j, %method%(this.get(i, j), value));
+        }
+    }
+    return this;
+})
+`;
+  var inplaceMethodWithOneArgMatrix = `
+(function %name%M(matrix) {
+    matrix = this.constructor.checkMatrix(matrix);
+    checkDimensions(this, matrix);
+    for (var i = 0; i < this.rows; i++) {
+        for (var j = 0; j < this.columns; j++) {
+            this.set(i, j, %method%(this.get(i, j), matrix.get(i, j)));
+        }
+    }
+    return this;
+})
+`;
+  var inplaceMethodWithOneArg = `
+(function %name%(value) {
+    if (typeof value === 'number') return this.%name%S(value);
+    return this.%name%M(value);
+})
+`;
   var staticMethodWithOneArg = staticMethodWithArgs;
   var operators = [// Arithmetic operators
   ['+', 'add'], ['-', 'sub', 'subtract'], ['*', 'mul', 'multiply'], ['/', 'div', 'divide'], ['%', 'mod', 'modulus'], // Bitwise operators
@@ -3475,7 +3558,7 @@ function abstractMatrix(superCtor) {
     var args = 'arg0';
 
     for (i = 1; i < methodWithArg[1]; i++) {
-      args += ", arg".concat(i);
+      args += `, arg${i}`;
     }
 
     if (methodWithArg[1] !== 1) {
@@ -5211,13 +5294,12 @@ var sortX = _interopDefault(__webpack_require__(47));
 
 var xyParser = __webpack_require__(48);
 
-function getAnnotations(spectrum) {
-  let options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  const {
-    fillColor = 'green',
-    strokeColor = 'red',
-    creationFct
-  } = options;
+function getAnnotations(spectrum, options = {}) {
+  const _options$fillColor = options.fillColor,
+        fillColor = _options$fillColor === void 0 ? 'green' : _options$fillColor,
+        _options$strokeColor = options.strokeColor,
+        strokeColor = _options$strokeColor === void 0 ? 'red' : _options$strokeColor,
+        creationFct = options.creationFct;
   const peaks = spectrum.peaks;
   if (!peaks) return [];
   let annotations = peaks.map(peak => {
@@ -5270,17 +5352,13 @@ function oneAnnotation(annotation, peak) {
  */
 
 
-function addPeak(spectrum) {
-  let peak = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
+function addPeak(spectrum, peak = {}) {
   if (!peak.wavelength) {
     throw new Error('addPeak: peak mush have wavelength property');
   }
 
-  const {
-    wavelength,
-    intensity
-  } = peak;
+  const wavelength = peak.wavelength,
+        intensity = peak.intensity;
 
   for (let existing of spectrum.peaks) {
     if (Number(existing.wavelength) === wavelength) return existing;
@@ -5315,12 +5393,11 @@ function getPeakKind(intensity, minIntensity, maxIntensity) {
  */
 
 
-function peakPicking(spectrum, targetWavelength) {
-  let options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-  const {
-    range = 0,
-    optimize = false
-  } = options; // find the peak that is the closest to the click
+function peakPicking(spectrum, targetWavelength, options = {}) {
+  const _options$range = options.range,
+        range = _options$range === void 0 ? 0 : _options$range,
+        _options$optimize = options.optimize,
+        optimize = _options$optimize === void 0 ? false : _options$optimize; // find the peak that is the closest to the click
 
   let bestPeak = getClosest(spectrum, targetWavelength);
 
@@ -5398,15 +5475,17 @@ function setBestPeak(spectrum, bestPeak, index) {
  */
 
 
-function autoPeakPicking(spectrum) {
-  let options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  const {
-    noiseLevel = 0.001,
-    minMaxRatio = 0.05,
-    fromWavelength = 0,
-    toWavelength = 5000,
-    replaceExisting = true
-  } = options;
+function autoPeakPicking(spectrum, options = {}) {
+  const _options$noiseLevel = options.noiseLevel,
+        noiseLevel = _options$noiseLevel === void 0 ? 0.001 : _options$noiseLevel,
+        _options$minMaxRatio = options.minMaxRatio,
+        minMaxRatio = _options$minMaxRatio === void 0 ? 0.05 : _options$minMaxRatio,
+        _options$fromWaveleng = options.fromWavelength,
+        fromWavelength = _options$fromWaveleng === void 0 ? 0 : _options$fromWaveleng,
+        _options$toWavelength = options.toWavelength,
+        toWavelength = _options$toWavelength === void 0 ? 5000 : _options$toWavelength,
+        _options$replaceExist = options.replaceExisting,
+        replaceExisting = _options$replaceExist === void 0 ? true : _options$replaceExist;
   let peaks = mlGsd.gsd(spectrum.wavelength, spectrum.intensity, {
     noiseLevel,
     minMaxRatio,
@@ -5459,13 +5538,11 @@ class Spectrum {
    */
 
 
-  setPeaks() {
-    let peaks = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  setPeaks(peaks = []) {
     this.peaks = peaks;
   }
 
-  peakPicking(targetWavelength) {
-    let options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  peakPicking(targetWavelength, options = {}) {
     peakPicking(this, targetWavelength, options);
   }
 
@@ -5530,8 +5607,7 @@ function fromJcamp(jcamp) {
  */
 
 
-function fromText(text) {
-  let options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+function fromText(text, options = {}) {
   options = Object.assign({}, options, {
     arrayType: 'xxyy'
   });
@@ -10466,8 +10542,7 @@ var Opt = __webpack_require__(7);
  */
 
 
-module.exports = function joinBroadPeaks(peakList) {
-  let options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+module.exports = function joinBroadPeaks(peakList, options = {}) {
   var width = options.width;
   var broadLines = []; // Optimize the possible broad lines
 
@@ -10550,12 +10625,11 @@ module.exports = function joinBroadPeaks(peakList) {
  * @return {Array} peakList
  */
 
-module.exports = function broadenPeaks(peakList) {
-  let options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  const {
-    factor = 2,
-    overlap = false
-  } = options;
+module.exports = function broadenPeaks(peakList, options = {}) {
+  const _options$factor = options.factor,
+        factor = _options$factor === void 0 ? 2 : _options$factor,
+        _options$overlap = options.overlap,
+        overlap = _options$overlap === void 0 ? false : _options$overlap;
 
   for (let peak of peakList) {
     peak.from = peak.x - peak.width / 2 * factor;
@@ -11518,7 +11592,7 @@ function getConverter() {
           currentData.push(parseFloat(values[j + 1]) * spectrum.yFactor);
         }
       } else {
-        result.logs.push("Format error: ".concat(values));
+        result.logs.push(`Format error: ${values}`);
       }
     }
   }
@@ -11550,7 +11624,7 @@ function postToWorker(input, options) {
   }
 
   return new Promise(function (resolve) {
-    var stamp = "".concat(Date.now()).concat(Math.random());
+    var stamp = `${Date.now()}${Math.random()}`;
     stamps[stamp] = resolve;
     worker.postMessage(JSON.stringify({
       stamp: stamp,
@@ -11561,7 +11635,7 @@ function postToWorker(input, options) {
 }
 
 function createWorker() {
-  var workerURL = URL.createObjectURL(new Blob(["var getConverter =".concat(getConverter.toString(), ";var convert = getConverter(); onmessage = function (event) { var data = JSON.parse(event.data); postMessage(JSON.stringify({stamp: data.stamp, output: convert(data.input, data.options)})); };")], {
+  var workerURL = URL.createObjectURL(new Blob([`var getConverter =${getConverter.toString()};var convert = getConverter(); onmessage = function (event) { var data = JSON.parse(event.data); postMessage(JSON.stringify({stamp: data.stamp, output: convert(data.input, data.options)})); };`], {
     type: 'application/javascript'
   }));
   worker = new Worker(workerURL);
@@ -11576,11 +11650,9 @@ function createWorker() {
   });
 }
 
-function createTree(jcamp) {
-  let options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  const {
-    flatten = false
-  } = options;
+function createTree(jcamp, options = {}) {
+  const _options$flatten = options.flatten,
+        flatten = _options$flatten === void 0 ? false : _options$flatten;
 
   if (typeof jcamp !== 'string') {
     throw new TypeError('the JCAMP should be a string');
@@ -11615,13 +11687,13 @@ function createTree(jcamp) {
 
       stack.push({
         title: title.join('\n'),
-        jcamp: "".concat(line, "\n"),
+        jcamp: `${line}\n`,
         children: []
       });
       current = stack[stack.length - 1];
       flat.push(current);
     } else if (labelLine.substring(0, 5) === '##END' && ntupleLevel === 0) {
-      current.jcamp += "".concat(line, "\n");
+      current.jcamp += `${line}\n`;
       var finished = stack.pop();
 
       if (stack.length !== 0) {
@@ -11632,7 +11704,7 @@ function createTree(jcamp) {
         result.push(finished);
       }
     } else if (current && current.jcamp) {
-      current.jcamp += "".concat(line, "\n");
+      current.jcamp += `${line}\n`;
       var match = labelLine.match(/^##(.*?)=(.+)/);
 
       if (match) {
@@ -11671,15 +11743,11 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return sortX; });
-function sortX(points) {
-  let options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  const {
-    x,
-    y
-  } = points;
-  const {
-    reverse = false
-  } = options;
+function sortX(points, options = {}) {
+  const x = points.x,
+        y = points.y;
+  const _options$reverse = options.reverse,
+        reverse = _options$reverse === void 0 ? false : _options$reverse;
   var sortFunc;
 
   if (!reverse) {
@@ -11732,22 +11800,27 @@ __webpack_require__.r(__webpack_exports__);
  * @return {Array<Array<number>>} - check the 'arrayType' option
  */
 
-function parseXY(text) {
-  let options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  const {
-    normalize = false,
-    uniqueX = false,
-    arrayType = 'xyxy',
-    xColumn = 0,
-    yColumn = 1,
-    keepInfo = false,
-    maxNumberColumns = Math.max(xColumn, yColumn) + 1,
-    minNumberColumns = Math.max(xColumn, yColumn) + 1
-  } = options;
+function parseXY(text, options = {}) {
+  const _options$normalize = options.normalize,
+        normalize = _options$normalize === void 0 ? false : _options$normalize,
+        _options$uniqueX = options.uniqueX,
+        uniqueX = _options$uniqueX === void 0 ? false : _options$uniqueX,
+        _options$arrayType = options.arrayType,
+        arrayType = _options$arrayType === void 0 ? 'xyxy' : _options$arrayType,
+        _options$xColumn = options.xColumn,
+        xColumn = _options$xColumn === void 0 ? 0 : _options$xColumn,
+        _options$yColumn = options.yColumn,
+        yColumn = _options$yColumn === void 0 ? 1 : _options$yColumn,
+        _options$keepInfo = options.keepInfo,
+        keepInfo = _options$keepInfo === void 0 ? false : _options$keepInfo,
+        _options$maxNumberCol = options.maxNumberColumns,
+        maxNumberColumns = _options$maxNumberCol === void 0 ? Math.max(xColumn, yColumn) + 1 : _options$maxNumberCol,
+        _options$minNumberCol = options.minNumberColumns,
+        minNumberColumns = _options$minNumberCol === void 0 ? Math.max(xColumn, yColumn) + 1 : _options$minNumberCol;
   var lines = text.split(/[\r\n]+/);
 
   if (arrayType !== 'xxyy' && arrayType !== 'xyxy') {
-    throw new Error("unsupported arrayType (".concat(arrayType, ")"));
+    throw new Error(`unsupported arrayType (${arrayType})`);
   }
 
   var maxY = Number.MIN_VALUE;
