@@ -1,0 +1,66 @@
+{
+  "name": "raman-spectrum",
+  "version": "0.1.0",
+  "description": "",
+  "main": "lib/index.js",
+  "module": "src/index.js",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "scripts": {
+    "build": "rollup -c && cheminfo-build --root RamanSpectrum",
+    "build-doc": "cheminfo doc",
+    "eslint": "eslint src",
+    "eslint-fix": "npm run eslint -- --fix",
+    "prepublishOnly": "rollup -c",
+    "test": "run-s test-only eslint",
+    "test-travis": "eslint src && jest --coverage && codecov",
+    "test-only": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cheminfo/raman-spectrum.git"
+  },
+  "keywords": [],
+  "author": "Luc Patiny",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cheminfo/raman-spectrum/issues"
+  },
+  "homepage": "https://github.com/cheminfo/raman-spectrum#readme",
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "devDependencies": {
+    "@babel/types": "^7.5.5",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "cheminfo-build": "^1.0.2",
+    "codecov": "^3.5.0",
+    "eslint": "^6.1.0",
+    "eslint-config-cheminfo": "^2.0.3",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^22.15.1",
+    "jest": "^24.8.0",
+    "jest-matcher-deep-close-to": "^1.3.0",
+    "npm-run-all": "^4.1.5",
+    "rollup": "^1.19.4"
+  },
+  "dependencies": {
+    "hash-it": "^4.0.4",
+    "jcampconverter": "^3.0.4",
+    "ml-array-max": "^1.1.1",
+    "ml-array-min": "^1.1.1",
+    "ml-array-utils": "^0.4.0",
+    "ml-array-xy-equally-spaced": "^1.0.0",
+    "ml-array-xy-filter-x": "1.0.0",
+    "ml-array-xy-sort-x": "^1.0.0",
+    "ml-gsd": "^2.0.5",
+    "ml-pca": "^4.0.0",
+    "ml-stat": "^1.3.3",
+    "ncu": "^0.2.1",
+    "nvu": "^1.0.0",
+    "object-hash": "^1.3.1",
+    "xy-parser": "^2.2.2"
+  }
+}
