@@ -1,6 +1,6 @@
 /**
  * raman-spectrum
- * @version v0.1.0
+ * @version v0.1.1
  * @link https://github.com/cheminfo/raman-spectrum#readme
  * @license MIT
  */
