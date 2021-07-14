@@ -1,6 +1,6 @@
 {
   "name": "raman-spectrum",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "",
   "main": "lib/index.js",
   "module": "src/index.js",
@@ -72,5 +72,6 @@
           "example": "https://raw.githubusercontent.com/cheminfo/raman-spectrum/master/src/from/__tests__/data/adamantan.jdx"
         }
       ]
-    }}
+    }
+  }
 }
