@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://www.github.com/cheminfo/raman-spectrum/compare/v0.3.0...v0.4.0) (2021-11-10)
+
+
+### Features
+
+* allow to export 'toJcamps' ([7e6da8f](https://www.github.com/cheminfo/raman-spectrum/commit/7e6da8fdb643f97d10dad718ec6188df95838638))
+
 ## [0.3.0](https://www.github.com/cheminfo/raman-spectrum/compare/v0.2.1...v0.3.0) (2021-11-10)
 
 
