@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://www.github.com/cheminfo/raman-spectrum/compare/v0.2.1...v0.3.0) (2021-11-10)
+
+
+### Features
+
+* add fromSPC ([bb72db3](https://www.github.com/cheminfo/raman-spectrum/commit/bb72db3dcdd6ee91bfbe0240e77183179d9a309f))
+
 ### [0.2.1](https://www.github.com/cheminfo/raman-spectrum/compare/v0.2.0...v0.2.1) (2021-07-14)
 
 
