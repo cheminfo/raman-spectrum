@@ -9,10 +9,12 @@
     "src"
   ],
   "scripts": {
-    "build": "cheminfo-build  --entry src/index.js --root RamanSpectrum",
+    "build": "cheminfo-build --entry src/index.js --root RamanSpectrum",
     "build-doc": "cheminfo doc",
     "eslint": "eslint src",
     "eslint-fix": "npm run eslint -- --fix",
+    "prettier": "prettier --check src",
+    "prettier-write": "prettier --write src",
     "prepublishOnly": "rollup -c",
     "test": "npm run test-coverage && npm run eslint",
     "test-coverage": "jest --coverage",
@@ -33,24 +35,21 @@
     "testEnvironment": "node"
   },
   "devDependencies": {
-    "@babel/plugin-transform-modules-commonjs": "^7.14.5",
-    "@types/jest": "^26.0.24",
+    "@babel/plugin-transform-modules-commonjs": "^7.16.0",
+    "@types/jest": "^27.0.2",
     "cheminfo-build": "^1.1.11",
     "codecov": "^3.8.2",
-    "eslint": "^7.30.0",
-    "eslint-config-cheminfo": "^5.2.4",
-    "eslint-plugin-import": "^2.23.4",
-    "eslint-plugin-jest": "^24.3.6",
-    "eslint-plugin-prettier": "^3.4.0",
+    "eslint": "^8.2.0",
+    "eslint-config-cheminfo": "^7.2.1",
     "esm": "^3.2.25",
-    "jest": "^27.0.6",
-    "jest-matcher-deep-close-to": "^2.0.1",
-    "prettier": "^2.3.2",
-    "rollup": "^2.53.1"
+    "jest": "^27.3.1",
+    "jest-matcher-deep-close-to": "^3.0.2",
+    "prettier": "^2.4.1",
+    "rollup": "^2.59.0"
   },
   "dependencies": {
-    "common-spectrum": "0.38.0",
-    "ml-gsd": "^6.6.3"
+    "common-spectrum": "0.43.1",
+    "ml-gsd": "^8.0.0"
   },
   "info": {
     "logo": "https://raw.githubusercontent.com/cheminfo/font/master/src/raman/assignment.svg",

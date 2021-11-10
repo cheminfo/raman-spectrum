@@ -20,11 +20,7 @@
  */
 
 export function getAnnotations(peaks, options = {}) {
-  const {
-    fillColor = 'green',
-    strokeColor = 'red',
-    creationFct,
-  } = options;
+  const { fillColor = 'green', strokeColor = 'red', creationFct } = options;
   let annotations = peaks.map((peak) => {
     let annotation = {
       line: 1,
@@ -36,7 +32,7 @@ export function getAnnotations(peaks, options = {}) {
     if (creationFct) {
       creationFct(annotation, peak);
     }
-        annotationAbsorbance(annotation, peak, options);
+    annotationAbsorbance(annotation, peak, options);
     return annotation;
   });
   return annotations;
