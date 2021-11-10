@@ -49,7 +49,8 @@
   },
   "dependencies": {
     "common-spectrum": "0.43.1",
-    "ml-gsd": "^8.0.0"
+    "ml-gsd": "^8.0.0",
+    "spc-parser": "^0.5.2"
   },
   "info": {
     "logo": "https://raw.githubusercontent.com/cheminfo/font/master/src/raman/assignment.svg",

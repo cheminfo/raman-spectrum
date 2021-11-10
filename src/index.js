@@ -12,3 +12,5 @@ export {
 } from 'common-spectrum';
 
 export const JSGraph = { ...OriginalJSGraph, getAnnotations };
+
+export * from './from/fromSPC.js';
