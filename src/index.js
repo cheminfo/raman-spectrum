@@ -15,3 +15,4 @@ export {
 export const JSGraph = { ...OriginalJSGraph, getAnnotations };
 
 export * from './from/fromSPC.js';
+export * from './from/fromWDF.js';

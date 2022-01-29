@@ -50,7 +50,8 @@
   "dependencies": {
     "common-spectrum": "0.43.1",
     "ml-gsd": "^8.0.0",
-    "spc-parser": "^0.5.2"
+    "spc-parser": "^0.5.2",
+    "wdf-parser": "^0.2.0"
   },
   "info": {
     "logo": "https://raw.githubusercontent.com/cheminfo/font/master/src/raman/assignment.svg",
