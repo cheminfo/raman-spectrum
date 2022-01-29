@@ -14,5 +14,6 @@ export {
 
 export const JSGraph = { ...OriginalJSGraph, getAnnotations };
 
+export * from './utils/surfaceAnalysis.js';
 export * from './from/fromSPC.js';
 export * from './from/fromWDF.js';
