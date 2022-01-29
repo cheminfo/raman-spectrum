@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://www.github.com/cheminfo/raman-spectrum/compare/v0.4.0...v0.5.0) (2022-01-29)
+
+
+### Features
+
+* add fromWDF ([ac97138](https://www.github.com/cheminfo/raman-spectrum/commit/ac97138d3ac653dd121fa76b18d6d8e5f2d1f9cb))
+
 ## [0.4.0](https://www.github.com/cheminfo/raman-spectrum/compare/v0.3.0...v0.4.0) (2021-11-10)
 
 
