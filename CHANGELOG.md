@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://www.github.com/cheminfo/raman-spectrum/compare/v0.5.0...v0.6.0) (2022-01-29)
+
+
+### Features
+
+* add surfaceAnalysis ([652bee7](https://www.github.com/cheminfo/raman-spectrum/commit/652bee78717744821fcca8fbf79b75b448068db7))
+
 ## [0.5.0](https://www.github.com/cheminfo/raman-spectrum/compare/v0.4.0...v0.5.0) (2022-01-29)
 
 
