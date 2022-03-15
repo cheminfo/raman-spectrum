@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.6.2](https://github.com/cheminfo/raman-spectrum/compare/v0.6.1...v0.6.2) (2022-03-15)
+
+
+### Bug Fixes
+
+* package release ([bf58887](https://github.com/cheminfo/raman-spectrum/commit/bf58887ff48707fb30dcf761e85f2bc73f247ea7))
+
 ### [0.6.1](https://github.com/cheminfo/raman-spectrum/compare/v0.6.0...v0.6.1) (2022-03-15)
 
 
