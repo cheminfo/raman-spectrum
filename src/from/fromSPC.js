@@ -1,6 +1,6 @@
 import { parse } from 'spc-parser';
 
-import { Analysis } from '..';
+import { Analysis } from '../index.js';
 
 export function fromSPC(arrayBuffer) {
   let analysis = new Analysis();

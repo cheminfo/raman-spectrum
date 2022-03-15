@@ -1,6 +1,6 @@
 import { parse } from 'wdf-parser';
 
-import { Analysis } from '..';
+import { Analysis } from '../index.js';
 
 export function fromWDF(arrayBuffer) {
   let analysis = new Analysis();
