@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.6.1](https://github.com/cheminfo/raman-spectrum/compare/v0.6.0...v0.6.1) (2022-03-15)
+
+
+### Bug Fixes
+
+* update dependencies to slice x before reverse ([5c896ad](https://github.com/cheminfo/raman-spectrum/commit/5c896ad7d1c967625069ee5851c346c22adfdddd))
+
 ## [0.6.0](https://www.github.com/cheminfo/raman-spectrum/compare/v0.5.0...v0.6.0) (2022-01-29)
 
 
