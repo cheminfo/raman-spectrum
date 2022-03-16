@@ -23,6 +23,13 @@ test('fromWDF', () => {
   expect(measurement.meta.xPosition).toBeCloseTo(-4501.903563829787);
   expect(measurement.meta.yPosition).toBeCloseTo(-2474.7475);
 
+  expect(analysis.spectra[0].variables.x.data[0]).toBeCloseTo(2801.458984375);
+  expect(analysis.spectra[1].variables.x.data[0]).toBeCloseTo(2801.458984375);
+  expect(analysis.spectra[0].variables.y.data[0]).toBeCloseTo(
+    1870.6690673828125,
+  );
+  expect(analysis.spectra[1].variables.y.data[0]).toBeCloseTo(2243.3583984375);
+
   expect(measurement.variables.x.label).toBe('Raman shift');
   expect(measurement.variables.y.label).toBe('Arbitrary Intensity');
 });
