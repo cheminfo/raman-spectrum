@@ -23,8 +23,8 @@ test('fromWDF', () => {
   expect(measurement.meta.xPosition).toBeCloseTo(-4501.903563829787);
   expect(measurement.meta.yPosition).toBeCloseTo(-2474.7475);
 
-  expect(analysis.spectra[0].variables.x.data[0]).toBeCloseTo(2801.458984375);
-  expect(analysis.spectra[1].variables.x.data[0]).toBeCloseTo(2801.458984375);
+  expect(analysis.spectra[0].variables.x.data[0]).toBeCloseTo(1218.43359375);
+  expect(analysis.spectra[1].variables.x.data[0]).toBeCloseTo(1218.43359375);
   expect(analysis.spectra[0].variables.y.data[0]).toBeCloseTo(
     1870.6690673828125,
   );

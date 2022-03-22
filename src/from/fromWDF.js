@@ -17,8 +17,9 @@ export function fromWDF(arrayBuffer) {
   for (let i = 0; i < yVariables.length; i++) {
     const yVariable = yVariables[i];
     let origin = origins[i] || {};
+
     analysis.pushSpectrum(
-      { x: xVariable, y: yVariable },
+      { x: { ...xVariable }, y: yVariable },
       {
         dataType: 'Raman',
         title,

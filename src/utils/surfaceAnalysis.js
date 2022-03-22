@@ -24,7 +24,6 @@ export function surfaceAnalysis(analysis, options = {}) {
       { from, to },
     ),
   }));
-
   // we should find a way to create a matrix and to find out width and height
   const distinctX = [
     ...new Set(integrations.map((integration) => integration.x)),
