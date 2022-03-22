@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.6.3](https://github.com/cheminfo/raman-spectrum/compare/v0.6.2...v0.6.3) (2022-03-22)
+
+
+### Bug Fixes
+
+* fromWDF returns correctly ordered x array ([688414a](https://github.com/cheminfo/raman-spectrum/commit/688414a91a155d0312bf2c8a1c10e3f5b217bcdc))
+
 ### [0.6.2](https://github.com/cheminfo/raman-spectrum/compare/v0.6.1...v0.6.2) (2022-03-15)
 
 
