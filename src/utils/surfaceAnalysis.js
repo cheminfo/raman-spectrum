@@ -1,5 +1,8 @@
+import {
+  getNormalizedSpectrum,
+  NormalizedSpectrumOptions,
+} from 'common-spectrum';
 import { xyIntegration, matrixZRescale } from 'ml-spectra-processing';
-
 /**
  *
  * @param {object} analysis
@@ -13,18 +16,21 @@ import { xyIntegration, matrixZRescale } from 'ml-spectra-processing';
  */
 export function surfaceAnalysis(analysis, options = {}) {
   const { from, to, rescale = {} } = options;
-  const integrations = analysis.spectra.map((spectrum) => ({
-    x: spectrum.meta.xPosition,
-    y: spectrum.meta.yPosition,
-    spectrum,
-    value: xyIntegration(
-      {
-        x: spectrum.variables.x.data,
-        y: spectrum.variables.y.data,
-      },
-      { from, to },
-    ),
-  }));
+  const integrations = analysis.spectra.map((spectrum) => {
+    spectrum = getNormalizedSpectrum(spectrum, {});
+    return {
+      x: spectrum.meta.xPosition,
+      y: spectrum.meta.yPosition,
+      spectrum,
+      value: xyIntegration(
+        {
+          x: spectrum.variables.x.data,
+          y: spectrum.variables.y.data,
+        },
+        { from, to },
+      ),
+    };
+  });
   // we should find a way to create a matrix and to find out width and height
   const distinctX = [
     ...new Set(integrations.map((integration) => integration.x)),
