@@ -40,7 +40,7 @@ describe('surfaceAnalysis', () => {
 
   it('create matrix from analyses', () => {
     let result = surfaceAnalysis(analysis);
-    expect(result.integrations[35]).toBeDeepCloseTo({
+    expect(result.integrations[35]).toMatchCloseTo({
       x: -4471.903563829787,
       y: -2444.7475,
       value: 7643478.975417376,
@@ -52,7 +52,7 @@ describe('surfaceAnalysis', () => {
 
   it('create matrix from analyses with from/to', () => {
     let result = surfaceAnalysis(analysis, { from: 1800, to: 2000 });
-    expect(result.integrations[35]).toBeDeepCloseTo({
+    expect(result.integrations[35]).toMatchCloseTo({
       x: -4471.903563829787,
       y: -2444.7475,
       value: 923130.1215815544,
@@ -63,7 +63,7 @@ describe('surfaceAnalysis', () => {
   });
   it('create matrix from analyses with rescale', () => {
     let result = surfaceAnalysis(analysis, { rescale: { min: 0, max: 255 } });
-    expect(result.integrations[35]).toBeDeepCloseTo({
+    expect(result.integrations[35]).toMatchCloseTo({
       x: -4471.903563829787,
       y: -2444.7475,
       value: 7643478.975417376,

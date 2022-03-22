@@ -16,6 +16,7 @@ export function surfaceAnalysis(analysis, options = {}) {
   const integrations = analysis.spectra.map((spectrum) => ({
     x: spectrum.meta.xPosition,
     y: spectrum.meta.yPosition,
+    spectrum,
     value: xyIntegration(
       {
         x: spectrum.variables.x.data,
@@ -36,6 +37,10 @@ export function surfaceAnalysis(analysis, options = {}) {
     .fill(0)
     .map(() => new Float64Array(distinctX.length));
 
+  const integrationsMatrix = new Array(distinctY.length)
+    .fill(0)
+    .map(() => new Array(distinctX.length));
+
   const xMapping = {};
   distinctX.forEach((x, index) => (xMapping[x] = index));
   const yMapping = {};
@@ -45,15 +50,16 @@ export function surfaceAnalysis(analysis, options = {}) {
     integration.xPixel = xMapping[integration.x];
     integration.yPixel = yMapping[integration.y];
     matrix[integration.yPixel][integration.xPixel] = integration.value;
+    integrationsMatrix[integration.yPixel][integration.xPixel] = integration;
   }
 
   const { min, max } = rescale;
   if (min !== undefined || max !== undefined) {
     matrix = matrixZRescale(matrix, { min, max });
   }
-
   return {
     integrations,
     matrix,
+    integrationsMatrix,
   };
 }
