@@ -1,7 +1,4 @@
-import {
-  getNormalizedSpectrum,
-  NormalizedSpectrumOptions,
-} from 'common-spectrum';
+import { getNormalizedSpectrum } from 'common-spectrum';
 import { xyIntegration, matrixZRescale } from 'ml-spectra-processing';
 /**
  *
