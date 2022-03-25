@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.7.0](https://github.com/cheminfo/raman-spectrum/compare/v0.6.3...v0.7.0) (2022-03-25)
+
+
+### Features
+
+* surfaceAnalysis returns an integrationsMatrix ([9f6f5be](https://github.com/cheminfo/raman-spectrum/commit/9f6f5be2713fad2942589a146599b0288f1dceda))
+* wip working on normalization of surfaceAnalysis ([e57ceaf](https://github.com/cheminfo/raman-spectrum/commit/e57ceaff6b771eacb82fb83c2d41c3aab2976333))
+
 ### [0.6.3](https://github.com/cheminfo/raman-spectrum/compare/v0.6.2...v0.6.3) (2022-03-22)
 
 
