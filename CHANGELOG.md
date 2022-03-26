@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/cheminfo/raman-spectrum/compare/v0.7.0...v0.8.0) (2022-03-26)
+
+
+### Features
+
+* surface analysis allows normalization ([5ad4d03](https://github.com/cheminfo/raman-spectrum/commit/5ad4d03bc1e6ab01fc2969530fe6f56f5a516d5b))
+
 ## [0.7.0](https://github.com/cheminfo/raman-spectrum/compare/v0.6.3...v0.7.0) (2022-03-25)
 
 
