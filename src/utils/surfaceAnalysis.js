@@ -9,12 +9,13 @@ import { xyIntegration, matrixZRescale } from 'ml-spectra-processing';
  * @param {object} [options.rescale={}]
  * @param {number} [options.rescale.min]
  * @param {number} [options.rescale.max]
+ * @param {object} [options.normalization]
  * @returns {object}
  */
 export function surfaceAnalysis(analysis, options = {}) {
-  const { from, to, rescale = {} } = options;
+  const { from, to, rescale = {}, normalization = {} } = options;
   const integrations = analysis.spectra.map((spectrum) => {
-    spectrum = getNormalizedSpectrum(spectrum, {});
+    spectrum = getNormalizedSpectrum(spectrum, normalization);
     return {
       x: spectrum.meta.xPosition,
       y: spectrum.meta.yPosition,
