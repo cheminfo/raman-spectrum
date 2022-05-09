@@ -1,6 +1,6 @@
 import { parse } from 'wdf-parser';
 
-import { Analysis } from '../index.js';
+import { Analysis } from 'common-spectrum';
 
 export function fromWDF(arrayBuffer) {
   let analysis = new Analysis();
