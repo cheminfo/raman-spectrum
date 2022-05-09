@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.9.0](https://github.com/cheminfo/raman-spectrum/compare/v0.8.0...v0.9.0) (2022-05-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* update dependencies and use ml-signal-processing
+
+### Features
+
+* update dependencies and use ml-signal-processing ([694dd8b](https://github.com/cheminfo/raman-spectrum/commit/694dd8b9425005ee3ab7d654f90d7e1865e9264b))
+
 ## [0.8.0](https://github.com/cheminfo/raman-spectrum/compare/v0.7.0...v0.8.0) (2022-03-26)
 
 
