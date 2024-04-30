@@ -54,7 +54,7 @@
     "wdf-parser": "^0.2.1"
   },
   "info": {
-    "logo": "https://raw.githubusercontent.com/cheminfo/font/master/src/raman/assignment.svg",
+    "logo": "https://raw.githubusercontent.com/cheminfo/font/main/src/raman/assignment.svg",
     "domain": [
       "Physical Chemistry",
       "Materials Science",
@@ -70,7 +70,7 @@
         {
           "extension": "jdx",
           "manufacturer": "IUPAC",
-          "example": "https://raw.githubusercontent.com/cheminfo/raman-spectrum/master/src/from/__tests__/data/adamantan.jdx"
+          "example": "https://raw.githubusercontent.com/cheminfo/raman-spectrum/main/src/from/__tests__/data/adamantan.jdx"
         }
       ]
     }
