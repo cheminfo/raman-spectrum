@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/cheminfo/raman-spectrum/compare/v1.0.0...v1.0.1) (2025-08-06)
+
+
+### Bug Fixes
+
+* documentation and lactame deploy actions ([c4d48e3](https://github.com/cheminfo/raman-spectrum/commit/c4d48e3f211d9276706c221b3e120794197977ca))
+
 ## [1.0.0](https://github.com/cheminfo/raman-spectrum/compare/v0.9.0...v1.0.0) (2025-08-06)
 
 
