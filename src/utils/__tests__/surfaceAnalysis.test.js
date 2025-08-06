@@ -1,7 +1,8 @@
-import { readFileSync } from 'fs';
-import { join } from 'path';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 import { toBeDeepCloseTo, toMatchCloseTo } from 'jest-matcher-deep-close-to';
+import { describe, expect, it } from 'vitest';
 
 import { fromWDF } from '../../index.js';
 import { surfaceAnalysis } from '../surfaceAnalysis.js';
@@ -20,14 +21,13 @@ describe('surfaceAnalysis', () => {
     const firstYs = analysis.spectra.map(
       (spectrum) => spectrum.variables.y.data[0],
     );
-    const lastXs = analysis.spectra.map(
-      (spectrum) =>
-        spectrum.variables.x.data[spectrum.variables.x.data.length - 1],
+    const lastXs = analysis.spectra.map((spectrum) =>
+      spectrum.variables.x.data.at(-1),
     );
-    const lastYs = analysis.spectra.map(
-      (spectrum) =>
-        spectrum.variables.y.data[spectrum.variables.y.data.length - 1],
+    const lastYs = analysis.spectra.map((spectrum) =>
+      spectrum.variables.y.data.at(-1),
     );
+
     expect(Math.min(...firstXs)).toBeCloseTo(1218.43359375);
     expect(Math.max(...firstXs)).toBeCloseTo(1218.43359375);
     expect(Math.min(...lastXs)).toBeCloseTo(2801.458984375);
@@ -40,6 +40,7 @@ describe('surfaceAnalysis', () => {
 
   it('create matrix from analyses', () => {
     let result = surfaceAnalysis(analysis);
+
     expect(result.integrations[35]).toMatchCloseTo({
       x: -4471.903563829787,
       y: -2444.7475,
@@ -52,6 +53,7 @@ describe('surfaceAnalysis', () => {
 
   it('create matrix from analyses with from/to', () => {
     let result = surfaceAnalysis(analysis, { from: 1800, to: 2000 });
+
     expect(result.integrations[35]).toMatchCloseTo({
       x: -4471.903563829787,
       y: -2444.7475,
@@ -61,8 +63,10 @@ describe('surfaceAnalysis', () => {
     });
     expect(result.matrix[0][0]).toBeCloseTo(735767.4637436867);
   });
+
   it('create matrix from analyses with rescale', () => {
     let result = surfaceAnalysis(analysis, { rescale: { min: 0, max: 255 } });
+
     expect(result.integrations[35]).toMatchCloseTo({
       x: -4471.903563829787,
       y: -2444.7475,

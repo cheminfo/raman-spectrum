@@ -1,6 +1,5 @@
-import { parse } from 'wdf-parser';
-
 import { Analysis } from 'common-spectrum';
+import { parse } from 'wdf-parser';
 
 export function fromWDF(arrayBuffer) {
   let analysis = new Analysis();
@@ -31,9 +30,9 @@ export function fromWDF(arrayBuffer) {
 }
 
 function getXVariable(blocks) {
-  const xBlock = blocks.filter(
+  const xBlock = blocks.find(
     (block) => block.blockType === 'WDF_BLOCKID_XLIST',
-  )[0];
+  );
   return {
     label: xBlock.xList.units.replace(/(.*) \((.*)\)/, '$1'),
     units: xBlock.xList.units.replace(/(.*) \((.*)\)/, '$2'),
@@ -42,9 +41,9 @@ function getXVariable(blocks) {
 }
 
 function getYVariables(blocks) {
-  const dataBlock = blocks.filter(
+  const dataBlock = blocks.find(
     (block) => block.blockType === 'WDF_BLOCKID_DATA',
-  )[0];
+  );
   const yVariables = [];
   for (let spectrum of dataBlock.spectrum) {
     yVariables.push({
@@ -56,17 +55,13 @@ function getYVariables(blocks) {
 }
 
 function getOrigins(blocks) {
-  const originBlock = blocks.filter(
+  const originBlock = blocks.find(
     (block) => block.blockType === 'WDF_BLOCKID_ORIGIN',
-  )[0];
+  );
   if (!originBlock) return [];
 
-  const xPositions = originBlock.origins.filter(
-    (entry) => entry.label === 'X',
-  )[0];
-  const yPositions = originBlock.origins.filter(
-    (entry) => entry.label === 'Y',
-  )[0];
+  const xPositions = originBlock.origins.find((entry) => entry.label === 'X');
+  const yPositions = originBlock.origins.find((entry) => entry.label === 'Y');
 
   if (!xPositions || !yPositions) return [];
 

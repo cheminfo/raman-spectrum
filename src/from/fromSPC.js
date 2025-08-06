@@ -1,6 +1,5 @@
-import { parse } from 'spc-parser';
-
 import { Analysis } from 'common-spectrum';
+import { parse } from 'spc-parser';
 
 export function fromSPC(arrayBuffer) {
   let analysis = new Analysis();

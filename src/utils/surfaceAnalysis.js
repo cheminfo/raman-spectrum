@@ -1,5 +1,5 @@
 import { getNormalizedSpectrum } from 'common-spectrum';
-import { xyIntegration, matrixZRescale } from 'ml-spectra-processing';
+import { matrixZRescale, xyIntegration } from 'ml-spectra-processing';
 /**
  *
  * @param {object} analysis
@@ -46,9 +46,9 @@ export function surfaceAnalysis(analysis, options = {}) {
     .map(() => new Array(distinctX.length));
 
   const xMapping = {};
-  distinctX.forEach((x, index) => (xMapping[x] = index));
+  for (const [index, x] of distinctX.entries()) xMapping[x] = index;
   const yMapping = {};
-  distinctY.forEach((y, index) => (yMapping[y] = index));
+  for (const [index, y] of distinctY.entries()) yMapping[y] = index;
 
   for (let integration of integrations) {
     integration.xPixel = xMapping[integration.x];

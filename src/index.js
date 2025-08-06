@@ -3,13 +3,13 @@ import { JSGraph as OriginalJSGraph } from 'common-spectrum';
 import { getAnnotations } from './jsgraph/getAnnotations';
 
 export {
-  Analysis,
   AnalysesManager,
-  toJcamp,
-  toJcamps,
-  peakPicking,
+  Analysis,
   autoPeakPicking,
   fromJcamp,
+  peakPicking,
+  toJcamp,
+  toJcamps,
 } from 'common-spectrum';
 
 export const JSGraph = { ...OriginalJSGraph, getAnnotations };

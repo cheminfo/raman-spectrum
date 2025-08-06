@@ -35,23 +35,23 @@
     "testEnvironment": "node"
   },
   "devDependencies": {
-    "@babel/plugin-transform-modules-commonjs": "^7.17.9",
-    "@types/jest": "^27.5.0",
-    "cheminfo-build": "^1.1.11",
+    "@babel/plugin-transform-modules-commonjs": "^7.27.1",
+    "@types/jest": "^30.0.0",
+    "cheminfo-build": "^1.2.1",
     "codecov": "^3.8.2",
-    "eslint": "^8.15.0",
-    "eslint-config-cheminfo": "^7.3.0",
+    "eslint": "^9.32.0",
+    "eslint-config-cheminfo": "^15.0.1",
     "esm": "^3.2.25",
-    "jest": "^28.1.0",
+    "jest": "^30.0.5",
     "jest-matcher-deep-close-to": "^3.0.2",
-    "prettier": "^2.6.2",
-    "rollup": "^2.72.1"
+    "prettier": "^3.6.2",
+    "rollup": "^4.46.2"
   },
   "dependencies": {
-    "common-spectrum": "1.0.2",
-    "ml-spectra-processing": "^11.6.0",
-    "spc-parser": "^0.5.2",
-    "wdf-parser": "^0.2.1"
+    "common-spectrum": "3.0.0",
+    "ml-spectra-processing": "^14.14.0",
+    "spc-parser": "^1.0.0",
+    "wdf-parser": "^0.3.0"
   },
   "info": {
     "logo": "https://raw.githubusercontent.com/cheminfo/font/main/src/raman/assignment.svg",

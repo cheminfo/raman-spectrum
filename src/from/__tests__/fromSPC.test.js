@@ -1,5 +1,7 @@
-import { readFileSync } from 'fs';
-import { join } from 'path';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+import { expect, test } from 'vitest';
 
 import { fromSPC } from '../..';
 
@@ -9,6 +11,7 @@ test('fromSPC', () => {
 
   let measurement = analysis.getSpectrum();
   let variables = measurement.variables;
+
   expect(measurement.variables.x.data).toHaveLength(3632);
   expect(Math.min(...variables.x.data)).toBeCloseTo(-3005.9560546875);
   expect(Math.max(...variables.x.data)).toBeCloseTo(3996.8232421875);

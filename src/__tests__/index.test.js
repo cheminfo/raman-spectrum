@@ -1,11 +1,14 @@
-import { readFileSync } from 'fs';
-import { join } from 'path';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 
-import { fromJcamp, autoPeakPicking } from '..';
+import { expect, test } from 'vitest';
+
+import { autoPeakPicking, fromJcamp } from '..';
 
 test('fromJcamp', () => {
   const arrayBuffer = readFileSync(join(__dirname, 'data/adamantan.jdx'));
   const analysis = fromJcamp(arrayBuffer);
+
   expect(analysis.spectra).toHaveLength(1);
   expect(analysis.spectra[0].variables).toHaveProperty('x');
   expect(analysis.spectra[0].variables).toHaveProperty('y');
@@ -13,5 +16,6 @@ test('fromJcamp', () => {
 
   const spectrum = analysis.getSpectrum();
   const peaks = autoPeakPicking(spectrum);
+
   expect(peaks).toHaveLength(38);
 });
