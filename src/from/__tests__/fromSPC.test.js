@@ -3,7 +3,7 @@ import { join } from 'node:path';
 
 import { expect, test } from 'vitest';
 
-import { fromSPC } from '../..';
+import { fromSPC } from '../../index.js';
 
 test('fromSPC', () => {
   let arrayBuffer = readFileSync(join(import.meta.dirname, './data/raman.spc'));

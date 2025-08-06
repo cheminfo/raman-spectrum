@@ -3,7 +3,7 @@ import { join } from 'node:path';
 
 import { expect, test } from 'vitest';
 
-import { fromWDF } from '../..';
+import { fromWDF } from '../../index.js';
 
 test('fromWDF', () => {
   let arrayBuffer = readFileSync(join(import.meta.dirname, './data/6x6.wdf'));

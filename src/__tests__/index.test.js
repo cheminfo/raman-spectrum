@@ -3,7 +3,7 @@ import { join } from 'node:path';
 
 import { expect, test } from 'vitest';
 
-import { autoPeakPicking, fromJcamp } from '..';
+import { autoPeakPicking, fromJcamp } from '../index.js';
 
 test('fromJcamp', () => {
   const arrayBuffer = readFileSync(

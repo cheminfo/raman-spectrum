@@ -1,6 +1,6 @@
 import { JSGraph as OriginalJSGraph } from 'common-spectrum';
 
-import { getAnnotations } from './jsgraph/getAnnotations';
+import { getAnnotations } from './jsgraph/getAnnotations.js';
 
 export {
   AnalysesManager,
