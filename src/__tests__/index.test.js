@@ -6,7 +6,9 @@ import { expect, test } from 'vitest';
 import { autoPeakPicking, fromJcamp } from '..';
 
 test('fromJcamp', () => {
-  const arrayBuffer = readFileSync(join(__dirname, 'data/adamantan.jdx'));
+  const arrayBuffer = readFileSync(
+    join(import.meta.dirname, 'data/adamantan.jdx'),
+  );
   const analysis = fromJcamp(arrayBuffer);
 
   expect(analysis.spectra).toHaveLength(1);

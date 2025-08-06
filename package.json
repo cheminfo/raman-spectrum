@@ -2,10 +2,9 @@
   "name": "raman-spectrum",
   "version": "0.9.0",
   "description": "",
-  "main": "lib/index.js",
-  "module": "src/index.js",
+  "type": "module",
+  "exports": "./src/index.js",
   "files": [
-    "lib",
     "src"
   ],
   "scripts": {
@@ -15,10 +14,9 @@
     "eslint-fix": "npm run eslint -- --fix",
     "prettier": "prettier --check src",
     "prettier-write": "prettier --write src",
-    "prepack": "rollup -c",
-    "test": "npm run test-coverage && npm run eslint",
-    "test-coverage": "jest --coverage",
-    "test-only": "jest"
+    "test": "npm run test-only && npm run eslint && npm run prettier && test-import",
+    "test-only": "vitest run --coverage",
+    "test-import": "node -e \"import('file://' + process.cwd() + '/src/index.js').then(console.log)\""
   },
   "repository": {
     "type": "git",
@@ -31,21 +29,16 @@
     "url": "https://github.com/cheminfo/raman-spectrum/issues"
   },
   "homepage": "https://github.com/cheminfo/raman-spectrum#readme",
-  "jest": {
-    "testEnvironment": "node"
-  },
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.27.1",
-    "@types/jest": "^30.0.0",
     "cheminfo-build": "^1.2.1",
     "codecov": "^3.8.2",
     "eslint": "^9.32.0",
     "eslint-config-cheminfo": "^15.0.1",
     "esm": "^3.2.25",
-    "jest": "^30.0.5",
     "jest-matcher-deep-close-to": "^3.0.2",
     "prettier": "^3.6.2",
-    "rollup": "^4.46.2"
+    "vitest": "^3.2.4"
   },
   "dependencies": {
     "common-spectrum": "3.0.0",

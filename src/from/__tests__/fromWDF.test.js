@@ -6,7 +6,7 @@ import { expect, test } from 'vitest';
 import { fromWDF } from '../..';
 
 test('fromWDF', () => {
-  let arrayBuffer = readFileSync(join(__dirname, './data/6x6.wdf'));
+  let arrayBuffer = readFileSync(join(import.meta.dirname, './data/6x6.wdf'));
   let analysis = fromWDF(arrayBuffer);
 
   expect(analysis.spectra).toHaveLength(36);

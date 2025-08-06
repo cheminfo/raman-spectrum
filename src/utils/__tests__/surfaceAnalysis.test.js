@@ -11,7 +11,9 @@ expect.extend({ toBeDeepCloseTo, toMatchCloseTo });
 
 describe('surfaceAnalysis', () => {
   const analysis = fromWDF(
-    readFileSync(join(__dirname, '../../from/__tests__/data/6x6.wdf')),
+    readFileSync(
+      join(import.meta.dirname, '../../from/__tests__/data/6x6.wdf'),
+    ),
   );
 
   it('check min / max of first X / Y', () => {

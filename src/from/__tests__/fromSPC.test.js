@@ -6,7 +6,7 @@ import { expect, test } from 'vitest';
 import { fromSPC } from '../..';
 
 test('fromSPC', () => {
-  let arrayBuffer = readFileSync(join(__dirname, './data/raman.spc'));
+  let arrayBuffer = readFileSync(join(import.meta.dirname, './data/raman.spc'));
   let analysis = fromSPC(arrayBuffer);
 
   let measurement = analysis.getSpectrum();
