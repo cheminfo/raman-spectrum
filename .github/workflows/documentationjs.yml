@@ -12,6 +12,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build documentation
         uses: zakodium/documentationjs-action@v1
+        with:
+          entry: src/index.js
       - name: Deploy to GitHub pages
         uses: JamesIves/github-pages-deploy-action@releases/v4
         with:

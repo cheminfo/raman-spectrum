@@ -1,11 +1,11 @@
 import { getNormalizedSpectrum } from 'common-spectrum';
 import { matrixZRescale, xyIntegration } from 'ml-spectra-processing';
 /**
- *
+ * We integrate the spectra from 'from' to 'to' and create a matrix
  * @param {object} analysis
  * @param {object} [options={}]
- * @param {number} [options.from]
- * @param {number} [options.to]
+ * @param {number} [options.from] - from Raman shift
+ * @param {number} [options.to] - to Raman shift
  * @param {object} [options.rescale={}]
  * @param {number} [options.rescale.min]
  * @param {number} [options.rescale.max]
