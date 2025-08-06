@@ -45,7 +45,7 @@ function getYVariables(blocks) {
     (block) => block.blockType === 'WDF_BLOCKID_DATA',
   );
   const yVariables = [];
-  for (let spectrum of dataBlock.spectrum) {
+  for (let spectrum of dataBlock.spectra) {
     yVariables.push({
       label: 'Arbitrary Intensity',
       data: spectrum,

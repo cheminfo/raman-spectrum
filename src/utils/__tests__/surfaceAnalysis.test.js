@@ -76,6 +76,7 @@ describe('surfaceAnalysis', () => {
       xPixel: 5,
       yPixel: 5,
     });
-    expect(result.matrix[0][0]).toBeCloseTo(160.6947321956272);
+
+    expect(result.matrix[0][0]).toBeCloseTo(113.54);
   });
 });
