@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.0.0](https://github.com/cheminfo/raman-spectrum/compare/v0.9.0...v1.0.0) (2025-08-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to type: module and fix testcases
+
+### release-as
+
+* 1.0.0 ([14ae04a](https://github.com/cheminfo/raman-spectrum/commit/14ae04a5f89f5cce7cd97eafcdb596d69c243f71))
+
+
+### Features
+
+* migrate to type: module and fix testcases ([e411316](https://github.com/cheminfo/raman-spectrum/commit/e4113166ef6b5d803c991690e9925609ee85a4ef))
+
 ## [0.9.0](https://github.com/cheminfo/raman-spectrum/compare/v0.8.0...v0.9.0) (2022-05-09)
 
 
