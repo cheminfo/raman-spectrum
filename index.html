@@ -1,471 +1,121 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset='utf-8'>
-  <title>raman-spectrum 1.0.1 | Documentation</title>
-  <meta name='viewport' content='width=device-width,initial-scale=1'>
-  <link href='assets/bass.css' rel='stylesheet'>
-  <link href='assets/style.css' rel='stylesheet'>
-  <link href='assets/github.css' rel='stylesheet'>
-  <link href='assets/split.css' rel='stylesheet'>
-</head>
-<body class='documentation m0'>
-    <div class='flex'>
-      <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
-        <div class='py1 px2'>
-          <h3 class='mb0 no-anchor'>raman-spectrum</h3>
-          <div class='mb1'><code>1.0.1</code></div>
-          <input
-            placeholder='Filter'
-            id='filter-input'
-            class='col12 block input'
-            spellcheck='false'
-            autocapitalize='off'
-            autocorrect='off'
-            type='text' />
-          <div id='toc'>
-            <ul class='list-reset h5 py1-ul'>
-              
-                
-                <li><a
-                  href='#getannotations'
-                  class="">
-                  getAnnotations
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#peak'
-                  class="">
-                  Peak
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#surfaceanalysis'
-                  class="">
-                  surfaceAnalysis
-                  
-                </a>
-                
-                </li>
-              
-            </ul>
-          </div>
-          <div class='mt1 h6 quiet'>
-            <a href='https://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
-          </div>
-        </div>
-      </div>
-      <div id='split-right' class='relative overflow-auto height-viewport-100'>
-        
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
+<!DOCTYPE html><html class="default" lang="en" data-base="./"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>raman-spectrum</title><meta name="description" content="Documentation for raman-spectrum"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script defer src="assets/main.js"></script><script async src="assets/icons.js" id="tsd-icons-script"></script><script async src="assets/search.js" id="tsd-search-script"></script><script async src="assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><a href="index.html" class="title">raman-spectrum</a><div id="tsd-toolbar-links"></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/><ul role="listbox" id="tsd-search-results"></ul><div id="tsd-search-status" aria-live="polite" aria-atomic="true"><div>Preparing search index...</div></div></dialog><a href="#" class="tsd-widget menu" id="tsd-toolbar-menu-trigger" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><h1>raman-spectrum</h1></div><div class="tsd-panel tsd-typography"><h1 id="raman-spectrum" class="tsd-anchor-link">raman-spectrum<a href="#raman-spectrum" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h1>
+<p><a href="https://www.npmjs.com/package/raman-spectrum"><img src="https://img.shields.io/npm/v/raman-spectrum.svg?style=flat-square" alt="NPM version"></a>
+<a href="https://codecov.io/gh/cheminfo/raman-spectrum"><img src="https://img.shields.io/codecov/c/github/cheminfo/raman-spectrum.svg?style=flat-square" alt="Test coverage"></a>
+<a href="https://www.npmjs.com/package/raman-spectrum"><img src="https://img.shields.io/npm/dm/raman-spectrum.svg?style=flat-square" alt="npm download"></a></p>
+<p>Read, process and display Raman spectra from JCAMP-DX, SPC and WDF files.</p>
+<h2 id="installation" class="tsd-anchor-link">Installation<a href="#installation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p><code>$ npm i raman-spectrum</code></p>
+<h2 id="usage" class="tsd-anchor-link">Usage<a href="#usage" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<h3 id="read-a-file" class="tsd-anchor-link">Read a file<a href="#read-a-file" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>Each reader returns an <code>Analysis</code> from <a href="https://github.com/cheminfo/common-spectrum">common-spectrum</a>.
+They accept the file content as an <code>ArrayBuffer</code>, a typed array or a Node.js <code>Buffer</code>.</p>
+<pre><code class="js"><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">readFileSync</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&#39;node:fs&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">fromJcamp</span><span class="hl-1">, </span><span class="hl-2">fromSPC</span><span class="hl-1">, </span><span class="hl-2">fromWDF</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&#39;raman-spectrum&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">analysis</span><span class="hl-1"> = </span><span class="hl-6">fromSPC</span><span class="hl-1">(</span><span class="hl-6">readFileSync</span><span class="hl-1">(</span><span class="hl-3">&#39;raman.spc&#39;</span><span class="hl-1">));</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">spectrum</span><span class="hl-1"> = </span><span class="hl-2">analysis</span><span class="hl-1">.</span><span class="hl-6">getSpectrum</span><span class="hl-1">();</span><br/><br/><span class="hl-2">spectrum</span><span class="hl-1">.</span><span class="hl-2">variables</span><span class="hl-1">.</span><span class="hl-2">x</span><span class="hl-1">.</span><span class="hl-2">label</span><span class="hl-1">; </span><span class="hl-7">// &#39;Raman Shift&#39;</span><br/><span class="hl-2">spectrum</span><span class="hl-1">.</span><span class="hl-2">variables</span><span class="hl-1">.</span><span class="hl-2">x</span><span class="hl-1">.</span><span class="hl-2">units</span><span class="hl-1">; </span><span class="hl-7">// &#39;cm-1&#39;</span><br/><span class="hl-2">spectrum</span><span class="hl-1">.</span><span class="hl-2">variables</span><span class="hl-1">.</span><span class="hl-2">y</span><span class="hl-1">.</span><span class="hl-2">label</span><span class="hl-1">; </span><span class="hl-7">// &#39;Arbitrary Intensity&#39;</span>
+</code><button type="button">Copy</button></pre>
 
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='getannotations'>
-      getAnnotations
-    </h3>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cheminfo/raman-spectrum/blob/2073f3f4977f417153d268ae1eddab4acd65ea6d/src/jsgraph/getAnnotations.js#L22-L39'>
-      <span>src/jsgraph/getAnnotations.js</span>
-      </a>
-    
-  </div>
-  
+<ul>
+<li><code>fromJcamp(data)</code> reads a JCAMP-DX file.</li>
+<li><code>fromSPC(data)</code> reads a Galactic SPC file, one spectrum per subfile.</li>
+<li><code>fromWDF(data)</code> reads a Renishaw WDF file. A mapping file gives one spectrum
+per point, and each spectrum carries its position in <code>meta.xPosition</code> and
+<code>meta.yPosition</code>.</li>
+</ul>
+<h3 id="pick-peaks" class="tsd-anchor-link">Pick peaks<a href="#pick-peaks" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<pre><code class="js"><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">autoPeakPicking</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&#39;raman-spectrum&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">peaks</span><span class="hl-1"> = </span><span class="hl-6">autoPeakPicking</span><span class="hl-1">(</span><span class="hl-2">spectrum</span><span class="hl-1">); </span><span class="hl-7">// [{ x, y, width }, …]</span>
+</code><button type="button">Copy</button></pre>
 
-  <p>Creates annotations for jsgraph that allows to display the result of peak picking</p>
+<p><code>peakPicking</code>, <code>toJcamp</code>, <code>toJcamps</code>, <code>Analysis</code> and <code>AnalysesManager</code> are
+re-exported from common-spectrum as well.</p>
+<h3 id="map-a-surface" class="tsd-anchor-link">Map a surface<a href="#map-a-surface" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p><code>surfaceAnalysis</code> integrates every spectrum of a mapping and arranges the
+integrals in a matrix: one row per distinct <code>yPosition</code>, one column per
+distinct <code>xPosition</code>.</p>
+<pre><code class="js"><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">readFileSync</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&#39;node:fs&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">fromWDF</span><span class="hl-1">, </span><span class="hl-2">surfaceAnalysis</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&#39;raman-spectrum&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">analysis</span><span class="hl-1"> = </span><span class="hl-6">fromWDF</span><span class="hl-1">(</span><span class="hl-6">readFileSync</span><span class="hl-1">(</span><span class="hl-3">&#39;6x6.wdf&#39;</span><span class="hl-1">));</span><br/><span class="hl-4">const</span><span class="hl-1"> { </span><span class="hl-5">matrix</span><span class="hl-1">, </span><span class="hl-5">integrations</span><span class="hl-1">, </span><span class="hl-5">integrationsMatrix</span><span class="hl-1"> } = </span><span class="hl-6">surfaceAnalysis</span><span class="hl-1">(</span><span class="hl-2">analysis</span><span class="hl-1">, {</span><br/><span class="hl-1">  </span><span class="hl-2">from:</span><span class="hl-1"> </span><span class="hl-8">1800</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-2">to:</span><span class="hl-1"> </span><span class="hl-8">2000</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-2">rescale:</span><span class="hl-1"> { </span><span class="hl-2">min:</span><span class="hl-1"> </span><span class="hl-8">0</span><span class="hl-1">, </span><span class="hl-2">max:</span><span class="hl-1"> </span><span class="hl-8">255</span><span class="hl-1"> },</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-2">matrix</span><span class="hl-1">.</span><span class="hl-2">length</span><span class="hl-1">; </span><span class="hl-7">// 6 rows</span><br/><span class="hl-2">matrix</span><span class="hl-1">[</span><span class="hl-8">0</span><span class="hl-1">].</span><span class="hl-2">length</span><span class="hl-1">; </span><span class="hl-7">// 6 columns</span>
+</code><button type="button">Copy</button></pre>
 
-    <div class='pre p1 fill-light mt0'>getAnnotations(peaks: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#peak">Peak</a>>, options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): any</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>peaks</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#peak">Peak</a>>)</code>
-	    
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>
-            = <code>{}</code>)</code>
-	    
-          </div>
-          
-          <table class='mt1 mb2 fixed-table h5 col-12'>
-            <colgroup>
-              <col width='30%' />
-              <col width='70%' />
-            </colgroup>
-            <thead>
-              <tr class='bold fill-light'>
-                <th>Name</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody class='mt1'>
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.fillColor</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
-  
-    (default <code>&#39;green&#39;</code>)
-  </td>
-  <td class='break-word'><span></span></td>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Default</th>
+<th>Meaning</th>
 </tr>
-
-
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.strokeColor</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
-  
-    (default <code>&#39;red&#39;</code>)
-  </td>
-  <td class='break-word'><span></span></td>
+</thead>
+<tbody>
+<tr>
+<td><code>from</code></td>
+<td>first point</td>
+<td>Raman shift where the integration starts</td>
 </tr>
-
-
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.showKind</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
-  
-    (default <code>true</code>)
-  </td>
-  <td class='break-word'><span>Display the kind, 'm', 'w', 'S'
-</span></td>
+<tr>
+<td><code>to</code></td>
+<td>last point</td>
+<td>Raman shift where the integration ends</td>
 </tr>
-
-
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.showAssignment</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
-  
-    (default <code>true</code>)
-  </td>
-  <td class='break-word'><span>Display the assignment
-</span></td>
+<tr>
+<td><code>rescale.min</code></td>
+<td><code>0</code> if <code>max</code> is set</td>
+<td>rescales the matrix so its smallest value becomes <code>min</code></td>
 </tr>
-
-
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.createFct</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>?</code>
-  </td>
-  <td class='break-word'><span>(annotation, peak) => {}: callback allowing to add properties
-</span></td>
+<tr>
+<td><code>rescale.max</code></td>
+<td><code>1</code> if <code>min</code> is set</td>
+<td>rescales the matrix so its largest value becomes <code>max</code></td>
 </tr>
-
-
-              
-            </tbody>
-          </table>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>any</code>:
-        array
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='peak'>
-      Peak
-    </h3>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cheminfo/raman-spectrum/blob/2073f3f4977f417153d268ae1eddab4acd65ea6d/src/jsgraph/getAnnotations.js#L1-L8'>
-      <span>src/jsgraph/getAnnotations.js</span>
-      </a>
-    
-  </div>
-  
-
-  
-    <div class='pre p1 fill-light mt0'>Peak</div>
-  
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Properties</div>
-    <div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>wavenumber</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-          
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>transmittance</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-          
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>intensity</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-          
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>kind</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-          
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>assignment</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-          
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='surfaceanalysis'>
-      surfaceAnalysis
-    </h3>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cheminfo/raman-spectrum/blob/2073f3f4977f417153d268ae1eddab4acd65ea6d/src/utils/surfaceAnalysis.js#L15-L69'>
-      <span>src/utils/surfaceAnalysis.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>We integrate the spectra from 'from' to 'to' and create a matrix</p>
-
-    <div class='pre p1 fill-light mt0'>surfaceAnalysis(analysis: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>, options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>analysis</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
-	    
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>
-            = <code>{}</code>)</code>
-	    
-          </div>
-          
-          <table class='mt1 mb2 fixed-table h5 col-12'>
-            <colgroup>
-              <col width='30%' />
-              <col width='70%' />
-            </colgroup>
-            <thead>
-              <tr class='bold fill-light'>
-                <th>Name</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody class='mt1'>
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.from</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>?</code>
-  </td>
-  <td class='break-word'><span>from Raman shift
-</span></td>
+<tr>
+<td><code>normalization</code></td>
+<td><code>{}</code></td>
+<td>applied to each spectrum first, see <code>getNormalizedSpectrum</code></td>
 </tr>
-
-
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.to</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>?</code>
-  </td>
-  <td class='break-word'><span>to Raman shift
-</span></td>
+</tbody>
+</table>
+<p>Each entry of <code>integrations</code> holds <code>x</code>, <code>y</code>, <code>value</code>, the normalized <code>spectrum</code>,
+and its place in the matrix, <code>xPixel</code> and <code>yPixel</code>. <code>integrationsMatrix</code> holds
+the same entries at their matrix positions.</p>
+<h3 id="display-peaks-in-jsgraph" class="tsd-anchor-link">Display peaks in jsgraph<a href="#display-peaks-in-jsgraph" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p><code>JSGraph.getAnnotations(peaks, options)</code> turns peaks of the shape
+<code>{ wavenumber, intensity, kind, assignment }</code> into jsgraph annotations.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Default</th>
+<th>Meaning</th>
 </tr>
-
-
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.rescale</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></code>
-  
-    (default <code>{}</code>)
-  </td>
-  <td class='break-word'><span></span></td>
+</thead>
+<tbody>
+<tr>
+<td><code>fillColor</code></td>
+<td><code>'green'</code></td>
+<td>fill of the peak marker</td>
 </tr>
-
-  
-    <tr>
-  <td class='break-word'><span class='code bold'>options.rescale.min</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>?</code>
-  </td>
-  <td class='break-word'><span></span></td>
+<tr>
+<td><code>strokeColor</code></td>
+<td><code>'red'</code></td>
+<td>stroke of the peak marker</td>
 </tr>
-
-
-  
-    <tr>
-  <td class='break-word'><span class='code bold'>options.rescale.max</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>?</code>
-  </td>
-  <td class='break-word'><span></span></td>
+<tr>
+<td><code>showKind</code></td>
+<td><code>true</code></td>
+<td>label each peak with its kind (<code>'m'</code>, <code>'w'</code>, <code>'S'</code>)</td>
 </tr>
-
-
-  
-
-
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.normalization</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>?</code>
-  </td>
-  <td class='break-word'><span></span></td>
+<tr>
+<td><code>showAssignment</code></td>
+<td><code>true</code></td>
+<td>label each peak with its assignment</td>
 </tr>
-
-
-              
-            </tbody>
-          </table>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></code>:
-        
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-      </div>
-    </div>
-  <script src='assets/anchor.js'></script>
-  <script src='assets/split.js'></script>
-  <script src='assets/site.js'></script>
-</body>
-</html>
+<tr>
+<td><code>assignmentAngle</code></td>
+<td><code>-45</code></td>
+<td>angle of the assignment label, in degrees</td>
+</tr>
+<tr>
+<td><code>creationFct</code></td>
+<td>—</td>
+<td><code>(annotation, peak) =&gt; {}</code>, to add properties</td>
+</tr>
+</tbody>
+</table>
+<h2 id="api-documentation" class="tsd-anchor-link"><a href="https://cheminfo.github.io/raman-spectrum/">API Documentation</a><a href="#api-documentation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<h2 id="license" class="tsd-anchor-link">License<a href="#license" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p><a href="media/LICENSE">MIT</a></p>
+</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg><h3>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg><h3>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#raman-spectrum"><span>raman-<wbr/>spectrum</span></a><ul><li><a href="#installation"><span>Installation</span></a></li><li><a href="#usage"><span>Usage</span></a></li><li><ul><li><a href="#read-a-file"><span>Read a file</span></a></li><li><a href="#pick-peaks"><span>Pick peaks</span></a></li><li><a href="#map-a-surface"><span>Map a surface</span></a></li><li><a href="#display-peaks-in-jsgraph"><span>Display peaks in jsgraph</span></a></li></ul></li><li><a href="#api-documentation"><span>API <wbr/>Documentation</span></a></li><li><a href="#license"><span>License</span></a></li></ul></div></details></div><div class="site-menu"><nav class="tsd-navigation"><a href="modules.html">raman-spectrum</a><ul class="tsd-small-nested-navigation" id="tsd-nav-container"><li>Loading...</li></ul></nav></div></div></div><footer></footer><div class="overlay"></div></body></html>
