@@ -39,7 +39,6 @@
   },
   "devDependencies": {
     "@vitest/coverage-v8": "^4.1.12",
-    "benchmark": "^2.1.4",
     "cheminfo-build": "^1.4.0",
     "eslint": "^10.15.0",
     "eslint-config-cheminfo": "^19.5.1",
