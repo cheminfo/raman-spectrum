@@ -14,9 +14,13 @@ import { matrixZRescale, xyIntegration } from 'ml-spectra-processing';
  */
 export function surfaceAnalysis(analysis, options = {}) {
   const { from, to, rescale = {}, normalization = {} } = options;
-  const integrations = analysis.spectra.map((spectrum) => {
-    spectrum = getNormalizedSpectrum(spectrum, normalization);
-    return {
+  const { spectra } = analysis;
+  const integrations = new Array(spectra.length);
+  const xValues = new Set();
+  const yValues = new Set();
+  for (let i = 0; i < spectra.length; i++) {
+    const spectrum = getNormalizedSpectrum(spectra[i], normalization);
+    const integration = {
       x: spectrum.meta.xPosition,
       y: spectrum.meta.yPosition,
       spectrum,
@@ -28,29 +32,30 @@ export function surfaceAnalysis(analysis, options = {}) {
         { from, to },
       ),
     };
-  });
+    integrations[i] = integration;
+    xValues.add(integration.x);
+    yValues.add(integration.y);
+  }
   // we should find a way to create a matrix and to find out width and height
-  const distinctX = [
-    ...new Set(integrations.map((integration) => integration.x)),
-  ].toSorted((a, b) => a - b);
-  const distinctY = [
-    ...new Set(integrations.map((integration) => integration.y)),
-  ].toSorted((a, b) => a - b);
+  const distinctX = Array.from(xValues);
+  distinctX.sort((a, b) => a - b);
+  const distinctY = Array.from(yValues);
+  distinctY.sort((a, b) => a - b);
 
-  let matrix = new Array(distinctY.length)
-    .fill(0)
-    .map(() => new Float64Array(distinctX.length));
-
-  const integrationsMatrix = new Array(distinctY.length)
-    .fill(0)
-    .map(() => new Array(distinctX.length));
+  let matrix = new Array(distinctY.length);
+  const integrationsMatrix = new Array(distinctY.length);
+  for (let row = 0; row < distinctY.length; row++) {
+    matrix[row] = new Float64Array(distinctX.length);
+    integrationsMatrix[row] = new Array(distinctX.length);
+  }
 
   const xMapping = {};
-  for (const [index, x] of distinctX.entries()) xMapping[x] = index;
+  for (let i = 0; i < distinctX.length; i++) xMapping[distinctX[i]] = i;
   const yMapping = {};
-  for (const [index, y] of distinctY.entries()) yMapping[y] = index;
+  for (let i = 0; i < distinctY.length; i++) yMapping[distinctY[i]] = i;
 
-  for (let integration of integrations) {
+  for (let i = 0; i < integrations.length; i++) {
+    const integration = integrations[i];
     integration.xPixel = xMapping[integration.x];
     integration.yPixel = yMapping[integration.y];
     matrix[integration.yPixel][integration.xPixel] = integration.value;

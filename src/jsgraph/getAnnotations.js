@@ -21,8 +21,10 @@
 
 export function getAnnotations(peaks, options = {}) {
   const { fillColor = 'green', strokeColor = 'red', creationFct } = options;
-  let annotations = peaks.map((peak) => {
-    let annotation = {
+  const annotations = new Array(peaks.length);
+  for (let i = 0; i < peaks.length; i++) {
+    const peak = peaks[i];
+    const annotation = {
       line: 1,
       type: 'rect',
       strokeColor,
@@ -33,8 +35,8 @@ export function getAnnotations(peaks, options = {}) {
       creationFct(annotation, peak);
     }
     annotationAbsorbance(annotation, peak, options);
-    return annotation;
-  });
+    annotations[i] = annotation;
+  }
   return annotations;
 }
 
