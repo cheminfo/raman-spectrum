@@ -32,10 +32,10 @@ export function surfaceAnalysis(analysis, options = {}) {
   // we should find a way to create a matrix and to find out width and height
   const distinctX = [
     ...new Set(integrations.map((integration) => integration.x)),
-  ].sort((a, b) => a - b);
+  ].toSorted((a, b) => a - b);
   const distinctY = [
     ...new Set(integrations.map((integration) => integration.y)),
-  ].sort((a, b) => a - b);
+  ].toSorted((a, b) => a - b);
 
   let matrix = new Array(distinctY.length)
     .fill(0)

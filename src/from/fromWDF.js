@@ -44,13 +44,10 @@ function getYVariables(blocks) {
   const dataBlock = blocks.find(
     (block) => block.blockType === 'WDF_BLOCKID_DATA',
   );
-  const yVariables = [];
-  for (let spectrum of dataBlock.spectra) {
-    yVariables.push({
-      label: 'Arbitrary Intensity',
-      data: spectrum,
-    });
-  }
+  const yVariables = Array.from(dataBlock.spectra, (spectrum) => ({
+    label: 'Arbitrary Intensity',
+    data: spectrum,
+  }));
   return yVariables;
 }
 

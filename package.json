@@ -1,22 +1,24 @@
 {
   "name": "raman-spectrum",
   "version": "1.0.1",
-  "description": "",
+  "description": "Read, process and display Raman spectra from JCAMP-DX, SPC and WDF files.",
   "type": "module",
-  "exports": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
   "files": [
     "src"
   ],
   "scripts": {
     "build": "cheminfo-build --entry src/index.js --root RamanSpectrum",
     "build-doc": "cheminfo doc",
-    "eslint": "eslint src",
-    "eslint-fix": "npm run eslint -- --fix",
-    "prettier": "prettier --check src",
-    "prettier-write": "prettier --write src",
-    "test": "npm run test-only && npm run eslint && npm run prettier && test-import",
-    "test-only": "vitest run --coverage",
-    "test-import": "node -e \"import('file://' + process.cwd() + '/src/index.js').then(console.log)\""
+    "eslint": "eslint .",
+    "eslint-fix": "eslint . --fix",
+    "prettier": "prettier --check .",
+    "prettier-write": "prettier --write .",
+    "test": "npm run test-only && npm run eslint && npm run prettier && npm run test-import",
+    "test-import": "node -e \"import('file://' + process.cwd() + '/src/index.js').then(console.log)\"",
+    "test-only": "vitest run --coverage"
   },
   "repository": {
     "type": "git",
@@ -29,19 +31,21 @@
     "url": "https://github.com/cheminfo/raman-spectrum/issues"
   },
   "homepage": "https://github.com/cheminfo/raman-spectrum#readme",
-  "devDependencies": {
-    "cheminfo-build": "^1.2.1",
-    "eslint": "^9.32.0",
-    "eslint-config-cheminfo": "^15.0.1",
-    "jest-matcher-deep-close-to": "^3.0.2",
-    "prettier": "^3.6.2",
-    "vitest": "^3.2.4"
-  },
   "dependencies": {
-    "common-spectrum": "3.0.0",
-    "ml-spectra-processing": "^14.14.0",
-    "spc-parser": "^1.0.0",
-    "wdf-parser": "^0.3.0"
+    "common-spectrum": "^4.0.1",
+    "ml-spectra-processing": "^14.35.1",
+    "spc-parser": "^2.1.1",
+    "wdf-parser": "^1.0.0"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^4.1.12",
+    "benchmark": "^2.1.4",
+    "cheminfo-build": "^1.4.0",
+    "eslint": "^10.15.0",
+    "eslint-config-cheminfo": "^19.5.1",
+    "jest-matcher-deep-close-to": "^3.0.2",
+    "prettier": "^3.10.1",
+    "vitest": "^4.1.12"
   },
   "info": {
     "logo": "https://raw.githubusercontent.com/cheminfo/font/main/src/raman/assignment.svg",
